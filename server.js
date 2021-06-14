@@ -17,18 +17,18 @@ mongoose.connection.once('open', () => {
 });
 
 // configure my cors middleware for other requests
-// const whitelist = ['http://localhost:3000']
-// const corsOptions = {
-//     origin: function (origin, callback) {
-//         if (whitelist.indexOf(origin) !== -1) {
-//             callback(null, true)
-//         } else {
-//             callback(new Error('Not allowed by CORS'))
-//         }
-//     }
-// }
+const whitelist = ['http://localhost:3000']
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
 
-// APP.use(cors(corsOptions))
+APP.use(cors(corsOptions))
 
 const transactionsController = require('./controllers/transactions');
 APP.use('/transactions', transactionsController);
