@@ -30,12 +30,12 @@ mongoose.connection.once('open', () => {
 
 // APP.use(cors(corsOptions))
 
-// const transactionsController = require('./controllers/transactions');
-// APP.use('/transactions', transactionsController);
+const transactionsController = require('./controllers/transactions');
+APP.use('/transactions', transactionsController);
 
-APP.get('/', (req, res) => {
-    res.send('connected');
-});
+// APP.get('/', (req, res) => {
+//     res.send('connected');
+// });
 
 APP.listen(PORT, () => {
     console.log(`Server is now listening at port: ${PORT}`);
