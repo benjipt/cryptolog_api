@@ -1,7 +1,7 @@
 const express = require('express');
 const transactions = express.Router();
 
-// const Transaction = require
+const Transaction = require('../models/transactions');
 
 transactions.get('/', (req, res) => {
     Transaction.find({}, (err, foundTransactions) => {
@@ -22,7 +22,7 @@ transactions.post('/', (req, res) => {
         }
         res.status(200).json(createdTransaction);
     })
-})
+});
 
 transactions.put('/:id', (req, res) => {
     Transaction.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedTransaction) => {
