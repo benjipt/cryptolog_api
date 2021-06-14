@@ -12,6 +12,12 @@ transactions.get('/', (req, res) => {
     })
 });
 
+
+// === CREATE ROUTE ===
+/*
+***** NOTE: this works with transaction Schema set to only require a string for coin, all other requireds are turned off *****
+curl -X POST -H "Content-Type: application/json" -d '{"coin" : "another fake coin" }' 'http://localhost:3003/transactions'
+*/
 transactions.post('/', (req, res) => {
     Transaction.create(req.body, (err, createdTransaction) => {
         if (err) {
@@ -24,6 +30,9 @@ transactions.post('/', (req, res) => {
     })
 });
 
+
+// === UPDATE ROUTE ===
+// curl -X PUT -H "Content-Type: application/json" -d '{"exchange" : "this is an update!!!!!!"}' 'http://localhost:3003/transactions/60c7bf84a1ac469a79d1d4f7'
 transactions.put('/:id', (req, res) => {
     Transaction.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedTransaction) => {
         if (err) {
@@ -33,6 +42,8 @@ transactions.put('/:id', (req, res) => {
     })
 });
 
+// === DELETE ROUTE ===
+// curl -X DELETE 'http://localhost:3003/transactions/60c7bf84a1ac469a79d1d4f7'
 transactions.delete('/:id', (req, res) => {
     Transaction.findByIdAndRemove(req.params.id, (err, deletedTransaction) => {
         if (err) {
