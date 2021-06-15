@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const express = require('express')
 const sessions = express.Router()
 const User = require('../models/users.js')
@@ -11,8 +12,9 @@ sessions.get('/new', (req, res) => {
 
 // on sessions form submit (log in)
 sessions.post('/', (req, res) => {
+  jwt.sign()
 
-  User.findOne({ username: req.body.username }, (err, foundUser) => {
+  User.findOne({ username: req.body.userName }, (err, foundUser) => {
     // Database error
     if (err) {
       console.log(err)
