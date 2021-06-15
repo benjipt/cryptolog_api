@@ -35,19 +35,25 @@ APP.use(
     })
 )
 
-// configure my cors middleware for other requests
-const whitelist = ['http://localhost:3000']
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
+/* curl -X POST \
+    -H "Content-Type: application/json" \
+    -d '{"userName":"testName"}' \
+    'localhost:3003/users'
+*/
 
-APP.use(cors(corsOptions));
+// configure my cors middleware for other requests
+// const whitelist = ['http://localhost:3000']
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         if (whitelist.indexOf(origin) !== -1) {
+//             callback(null, true)
+//         } else {
+//             callback(new Error('Not allowed by CORS'))
+//         }
+//     }
+// }
+
+// APP.use(cors(corsOptions));
 
 // CONTROLLERS
 const transactionsController = require('./controllers/transactions');
