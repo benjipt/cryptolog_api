@@ -1,5 +1,6 @@
 // DEPENDENCIES
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const APP = express();
@@ -36,7 +37,7 @@ APP.use(
 )
 
 /// !!!! CORS SECTION COMMENTED OUT TO RUN CURL COMMANDS !!!!!
-// // configure my cors middleware for other requests
+// configure my cors middleware for other requests
 // const whitelist = ['http://localhost:3000', 'http://localhost:3000/users', 'mongodb://localhost:27017/cryptolog']
 // const corsOptions = {
 //     origin: function (origin, callback) {
