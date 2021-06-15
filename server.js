@@ -1,5 +1,6 @@
 // DEPENDENCIES
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const APP = express();
@@ -14,10 +15,10 @@ const MONGODBNAME = process.env.MONGODBNAME;
 
 //Database
 // How to connect to the database either via heroku or locally
-const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost:27017/${MONGODBNAME}`;
+const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost:27017/cryptolog`;
 
 // Connect to Mongo
-mongoose.connect(MONGODB_URI ,  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect( MONGODB_URI ,  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 mongoose.connection.once('open', () => {
     console.log('connected to mongo :)');
@@ -35,14 +36,9 @@ APP.use(
     })
 )
 
-/* curl -X POST \
-    -H "Content-Type: application/json" \
-    -d '{"userName":"testName"}' \
-    'localhost:3003/users'
-*/
-
+/// !!!! CORS SECTION COMMENTED OUT TO RUN CURL COMMANDS !!!!!
 // configure my cors middleware for other requests
-// const whitelist = ['http://localhost:3000']
+// const whitelist = ['http://localhost:3000', 'http://localhost:3000/users', 'mongodb://localhost:27017/cryptolog']
 // const corsOptions = {
 //     origin: function (origin, callback) {
 //         if (whitelist.indexOf(origin) !== -1) {
