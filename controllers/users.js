@@ -8,12 +8,24 @@ users.get('/new', (req, res) => {
 //   res.render('users/new.ejs')
 })
 
+
+// === CREATE ROUTE ===
+/*
+curl -X POST -H "Content-Type: application/json" -d '{"userName" : "fake name 2" , "userPassword" : "password" }' 'http://localhost:3003/users'
+*/
 users.post('/', (req, res) => {
   //overwrite the user password with the hashed password, then pass that in to our database
-  req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+  console.log(req.body)
+  req.body.userPassword = bcrypt.hashSync(req.body.userPassword, bcrypt.genSaltSync(10))
   User.create(req.body, (err, createdUser) => {
     console.log('user is created', createdUser)
-    res.redirect('/')
+    if (err) {
+      // Tell the user something went wrong
+      // status code 400 === something broke
+      // json === include a body with the message from the db
+      res.status(400).json({ error: err.message });
+  }
+  res.status(200).json({ message : 'user created!'});
   })
 })
 
