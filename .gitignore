@@ -1,6 +1,9 @@
 # Node Modules
 node_modules
 
+# ENV
+.env
+
 # Logs
 logs
 *.log

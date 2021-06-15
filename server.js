@@ -1,20 +1,39 @@
+// DEPENDENCIES
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
 const APP = express();
-const PORT = 3003;
+const session = require('express-session');
+require('dotenv').config();
+
+
+//Port
+// Allow use of Heroku's port or your own local port, depending on the environment
+const PORT = process.env.PORT || 3003;
+const MONGODBNAME = process.env.MONGODBNAME;
+
+//Database
+// How to connect to the database either via heroku or locally
+const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost:27017/${MONGODBNAME}`;
+
+// Connect to Mongo
+mongoose.connect(MONGODB_URI ,  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+
+mongoose.connection.once('open', () => {
+    console.log('connected to mongo :)');
+});
 
 // MIDDLEWARE
 APP.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/cryptolog', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-mongoose.connection.once('open', () => {
-    console.log('connected to mongo :)');
-});
+// SESSIONS
+APP.use(
+    session({
+      secret: process.env.SECRET,
+      resave: false,
+      saveUninitialized: false
+    })
+)
 
 // configure my cors middleware for other requests
 const whitelist = ['http://localhost:3000']
@@ -28,10 +47,18 @@ const corsOptions = {
     }
 }
 
-APP.use(cors(corsOptions))
+APP.use(cors(corsOptions));
 
+// CONTROLLERS
 const transactionsController = require('./controllers/transactions');
 APP.use('/transactions', transactionsController);
+
+const sessionsController = require('./controllers/sessions');
+APP.use('/sessions', sessionsController);
+
+const usersController = require('./controllers/users');
+APP.use('/users', usersController);
+
 
 // APP.get('/', (req, res) => {
 //     res.send('connected');
