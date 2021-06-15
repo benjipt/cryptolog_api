@@ -3,6 +3,7 @@ const express = require('express')
 const sessions = express.Router()
 const User = require('../models/users.js')
 
+
 sessions.get('/new', (req, res) => {
     //what to do here?
   res.render('sessions/new.ejs', { currentUser: req.session.currentUser })

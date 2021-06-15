@@ -14,10 +14,10 @@ const MONGODBNAME = process.env.MONGODBNAME;
 
 //Database
 // How to connect to the database either via heroku or locally
-const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost:27017/${MONGODBNAME}`;
+const MONGODB_URI = process.env.MONGODB_URI || `mongodb://localhost:27017/cryptolog`;
 
 // Connect to Mongo
-mongoose.connect(MONGODB_URI ,  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect( MONGODB_URI ,  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 mongoose.connection.once('open', () => {
     console.log('connected to mongo :)');
@@ -35,19 +35,20 @@ APP.use(
     })
 )
 
-// configure my cors middleware for other requests
-const whitelist = ['http://localhost:3000']
-const corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
-}
+/// !!!! CORS SECTION COMMENTED OUT TO RUN CURL COMMANDS !!!!!
+// // configure my cors middleware for other requests
+// const whitelist = ['http://localhost:3000', 'http://localhost:3000/users', 'mongodb://localhost:27017/cryptolog']
+// const corsOptions = {
+//     origin: function (origin, callback) {
+//         if (whitelist.indexOf(origin) !== -1) {
+//             callback(null, true)
+//         } else {
+//             callback(new Error('Not allowed by CORS'))
+//         }
+//     }
+// }
 
-APP.use(cors(corsOptions));
+// APP.use(cors(corsOptions));
 
 // CONTROLLERS
 const transactionsController = require('./controllers/transactions');
