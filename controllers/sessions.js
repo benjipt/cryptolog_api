@@ -4,15 +4,18 @@ const sessions = express.Router()
 const User = require('../models/users.js')
 
 
-sessions.get('/new', (req, res) => {
-    //what to do here?
-  res.render('sessions/new.ejs', { currentUser: req.session.currentUser })
-})
+// sessions.get('/new', (req, res) => {
+//     //what to do here?
+//   res.render('sessions/new.ejs', { currentUser: req.session.currentUser })
+// })
 
 // on sessions form submit (log in)
 sessions.post('/', (req, res) => {
+  console.log(req.body)
 
-  User.findOne({ username: req.body.username }, (err, foundUser) => {
+  User.findOne({ userName: req.body.userName }, (err, foundUser) => {
+    console.log(foundUser)
+    // console.log(userName)
     // Database error
     if (err) {
       console.log(err)
@@ -23,7 +26,8 @@ sessions.post('/', (req, res) => {
     } else {
       // user is found yay!
       // now let's check if passwords match
-      if (bcrypt.compareSync(req.body.password, foundUser.password)) {
+      if (bcrypt.compareSync(req.body.userPassword, foundUser.userPassword)) {
+        console.log(req.body)
         // add the user to our session
         req.session.currentUser = foundUser
         // redirect back to our home page
