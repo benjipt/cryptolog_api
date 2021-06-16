@@ -3,15 +3,15 @@ const express = require('express')
 const users = express.Router()
 const User = require('../models/users.js')
 
-users.get('/new', (req, res) => {
-    //how to render?
-//   res.render('users/new.ejs')
-})
+// users.get('/new', (req, res) => {
+//     //how to render?
+// //   res.render('users/new.ejs')
+// })
 
 
 // === CREATE ROUTE ===
 /*
-curl -X POST -H "Content-Type: application/json" -d '{"userName" : "fake name 2" , "userPassword" : "password" }' 'http://localhost:3003/users'
+curl -X POST -H "Content-Type: application/json" -d '{"userName" : "fake name 3" , "userPassword" : "password" }' 'http://localhost:3003/users'
 */
 users.post('/', (req, res) => {
   //overwrite the user password with the hashed password, then pass that in to our database

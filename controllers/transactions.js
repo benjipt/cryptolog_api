@@ -19,7 +19,11 @@ transactions.get('/', (req, res) => {
 curl -X POST -H "Content-Type: application/json" -d '{"coin" : "another fake coin" }' 'http://localhost:3003/transactions'
 */
 transactions.post('/', (req, res) => {
-    Transaction.create(req.body, (err, createdTransaction) => {
+    // const package = {
+    //     // add in the schema plus req.session
+    //     // maybe tryp package=req.body then package.userName = 'req.session.currentUser._id'
+    // }
+    Transaction.create(req.body, (err, createdTransaction) => {         // pass in package rather than req.body
         if (err) {
             // Tell the user something went wrong
             // status code 400 === something broke
@@ -30,6 +34,17 @@ transactions.post('/', (req, res) => {
     })
 });
 
+
+// SHOW TRANSACTION
+// Will be used to for passing transaction state to Edit Form on front-end. -Benji
+transactions.get('/:id', (req, res) => {
+    Transaction.findById(req.params.id, (err, foundTransaction) => {
+        if (err) {
+            res.status(400).json({ error: err.message });
+        }
+        res.status(200).json(foundTransaction);
+    })
+});
 
 // === UPDATE ROUTE ===
 // curl -X PUT -H "Content-Type: application/json" -d '{"exchange" : "this is an update!!!!!!"}' 'http://localhost:3003/transactions/60c7bf84a1ac469a79d1d4f7'
