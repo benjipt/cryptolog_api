@@ -19,7 +19,11 @@ transactions.get('/', (req, res) => {
 curl -X POST -H "Content-Type: application/json" -d '{"coin" : "another fake coin" }' 'http://localhost:3003/transactions'
 */
 transactions.post('/', (req, res) => {
-    Transaction.create(req.body, (err, createdTransaction) => {
+    // const package = {
+    //     // add in the schema plus req.session
+    //     // maybe tryp package=req.body then package.userName = 'req.session.currentUser._id'
+    // }
+    Transaction.create(req.body, (err, createdTransaction) => {         // pass in package rather than req.body
         if (err) {
             // Tell the user something went wrong
             // status code 400 === something broke
