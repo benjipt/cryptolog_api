@@ -38,6 +38,7 @@ sessions.post('/', (req, res) => {
         console.log('line 38 server side ' + req.session.currentUser)
         // res.redirect('/')
         // res.send(req.session.currentUser._id)   //not needed
+        res.send(foundUser)
       } else {
         // passwords do not match
         res.send('<a href="/"> password does not match </a>')

@@ -36,9 +36,13 @@ APP.use(
     })
 )
 
-/// !!!! CORS SECTION COMMENTED OUT TO RUN CURL COMMANDS !!!!!
+// / !!!! CORS SECTION COMMENTED OUT TO RUN CURL COMMANDS !!!!!
 // configure my cors middleware for other requests
+<<<<<<< HEAD
 const whitelist = ['http://localhost:3000', 'http://localhost:3000/users', 'mongodb://localhost:27017/cryptolog']
+=======
+const whitelist = ['http://localhost:3000', 'http://localhost:3000/users', 'mongodb://localhost:27017/cryptolog' , 'https://cryptolog-frontend.herokuapp.com' , 'https://cryptolog-frontend.herokuapp.com' , 'https://cryptolog-api.herokuapp.com' , 'https://cryptolog-api.herokuapp.com/']
+>>>>>>> a17ecf554e0ad0ecf769993f16c5f237dcf89c62
 const corsOptions = {
     origin: function (origin, callback) {
         if (whitelist.indexOf(origin) !== -1) {
