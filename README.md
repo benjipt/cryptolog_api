@@ -4,6 +4,7 @@
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Project status](#project-status)
+* [User Stories](#user-stories)
 * [Launch](#launch)
 
 ## General info
@@ -27,6 +28,11 @@ Complete w/ plans to add future updates/features:
 - Fix known issue: Login Form & New User Form can surface at same time.
 - Fix known issue: Transaction does not update automatically on page after edit form submission.
 - Fix known issue: password match conditional notification should only render when passwords do not match (briefly renders even when matching).
+
+## User Stories
+- Users can add purchase transactions of their respective currency unit at a specific price and time.
+- Users can add sell transactions and add the sell price at a specific price and time.
+- Users can update and delete any previously added transactions.
 
 ## Launch
 View [here](https://cryptolog-frontend.herokuapp.com/)
