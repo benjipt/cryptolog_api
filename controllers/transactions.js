@@ -19,6 +19,7 @@ transactions.get('/', (req, res) => {
 curl -X POST -H "Content-Type: application/json" -d '{"coin" : "another fake coin" }' 'http://localhost:3003/transactions'
 */
 transactions.post('/', (req, res) => {
+    // *** this could be used to help populate the transaction with user ID information ***
     // const package = {
     //     // add in the schema plus req.session
     //     // maybe tryp package=req.body then package.userName = 'req.session.currentUser._id'

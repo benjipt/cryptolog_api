@@ -1,18 +1,17 @@
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+// const jwt = require('jsonwebtoken')    //maybe needed for further development purposes
 const express = require('express')
 const sessions = express.Router()
 const User = require('../models/users.js')
 
 
 sessions.get('/new', (req, res) => {
-    //what to do here?
   res.render('sessions/new.ejs', { currentUser: req.session.currentUser })
 })
 
 // on sessions form submit (log in)
 sessions.post('/', (req, res) => {
-  // jwt.sign()
+  // jwt.sign()       //maybe needed for further development purposes
   console.log('line 16   sessions route hit!!!')
 
   User.findOne({ userName: req.body.userName }, (err, foundUser) => {   // I don't know if we are actually pulling from req.body
@@ -29,15 +28,7 @@ sessions.post('/', (req, res) => {
       // now let's check if passwords match
       if (bcrypt.compareSync(req.body.userPassword, foundUser.userPassword)) {
         // add the user to our session
-        console.log('req session pre ' + req.session.currentUser)
         req.session.currentUser = foundUser
-        console.log('line 34 server side ' + req.session.currentUser)
-        // redirect back to our home page
-        console.log('user found!!!')
-        // req.session.destroy()
-        console.log('line 38 server side ' + req.session.currentUser)
-        // res.redirect('/')
-        // res.send(req.session.currentUser._id)   //not needed
         res.send(foundUser)
       } else {
         // passwords do not match
