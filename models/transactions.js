@@ -8,7 +8,7 @@ const transactionSchema = new Schema({
     exchange: { type: String, required: true },
     transactionDate: { type: Date, required: true },
     transactionType: { type: String, required: true },
-    createdBy: {type:String, required: false},
+    createdBy: {type:String, required: false},          //currently not being populated, future improvements
 }, { timestamps: true });
 
 const Transaction = mongoose.model('Transactions', transactionSchema);

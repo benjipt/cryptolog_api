@@ -61,11 +61,6 @@ APP.use('/sessions', sessionsController);
 const usersController = require('./controllers/users');
 APP.use('/users', usersController);
 
-
-// APP.get('/', (req, res) => {
-//     res.send('connected');
-// });
-
 APP.listen(PORT, () => {
     console.log(`Server is now listening at port: ${PORT}`);
 });
