@@ -3,8 +3,11 @@ const transactions = express.Router();
 
 const Transaction = require('../models/transactions');
 
-transactions.get('/', (req, res) => {
-    Transaction.find({}, (err, foundTransactions) => {
+// UPDATED: Now returns only transactions associated with specific userId -@benjipt
+transactions.get('/:userId', (req, res) => {
+    Transaction.find(
+        { userId: req.params.userId },
+        (err, foundTransactions) => {
         if (err) {
             res.status(400).json({ error: err.message });
         }
